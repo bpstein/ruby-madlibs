@@ -1,8 +1,20 @@
 # Build a dictionary of words
+nouns = File.open('nouns.txt', 'r') do |f|
+	f.read
+end.split
+
+verbs = File.open('verbs.txt', 'r') do |f|
+	f.read
+end.split
+
+adjectives = File.open('adjectives.txt', 'r') do |f|
+	f.read
+end.split
+
 dictionary = {
-	nouns: ['dog', 'car', 'mouse', 'clown', 'hat'],
-	verbs: ['juggle', 'spin', 'speak'],
-	adjectives: ['fantastic', 'great', 'red', 'big']
+	nouns: nouns,
+	verbs: verbs,
+	adjectives: adjectives
 }
 
 # Method to format user messages
@@ -22,8 +34,19 @@ contents = File.open(ARGV[0], 'r') do |f|
 	f.read
 end
 
-contents.gsub!('NOUN', dictionary[:nouns].sample)
-contents.gsub!('VERB', dictionary[:verbs].sample)
-contents.gsub!('ADJECTIVE', dictionary[:adjectives].sample)
+# Generate random nouns
+contents.gsub!('NOUN').each do |noun|
+	dictionary[:nouns].sample
+end
+
+# Generate random verb
+contents.gsub!('VERB').each do |verb|
+	dictionary[:verbs].sample
+end
+
+# Generate random adjective
+contents.gsub!('ADJECTIVE').each do |adjective|
+	dictionary[:adjectives].sample
+end
 
 p contents
