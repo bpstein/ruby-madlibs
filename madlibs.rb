@@ -27,6 +27,11 @@ def exit_with(msg)
 	exit
 end
 
+def get_input(word)
+	say "Input a #{word}:"
+	STDIN.gets.chomp
+end
+
 exit_with("No input file!") if ARGV.empty?
 exit_with("File doesn't exist!") if !File.exists?(ARGV[0])
 
